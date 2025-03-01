@@ -50,8 +50,20 @@ namespace osu_BackgroundChanger
         private void InfoButton_Click(object sender, EventArgs e)
         {
             const string title = "Info";
-            const string message = "Made by cayden.\nThe basic resolution is: 2732x1536 (it can be lower)\nThe import button is the image which gonna be on the osu! background.\nThe reset button gonna delete the image you imported and can fix some problems.\nBy the way, make sure when you click on reset, launch osu! and press the next button around 20 times for load all the background.\nThe convert button is for converting png to jpg.\nFor make it work, put seasonal background as always.\nFor any question ->\nMy discord: cayden#3407\nLink of the project: https://github.com/ret42/osu-BackgroundChanger \nVersion: 1.0";
-            MessageBox.Show(message, title);
+            const string message = "Originally made by cayden. Modified by Charamellized.\n\n" +
+                "The basic resolution is: 2732x1536 (it can be lower)\n" +
+                "The import button is the image which is going to be imported as the osu! background.\n" +
+                "The reset button is going to delete the image you imported and can fix some problems.\n" +
+                "By the way, make sure when you click on reset, launch osu! and press the next button around 20 times for load all the background.\n" +
+                "The convert button is used for converting png to jpg.\n" +
+                "To make it work, put seasonal background as always.\n\n" +
+                "This program was modified to not use a paid library, which is now not working.\n\n" + 
+                "For any question ->\n" +
+                "My discord: cayden#3407 or charamellized\n" +
+                "Original Project Link: https://github.com/ret42/osu-BackgroundChanger\n" +
+                "Modified Project Link: https://github.com/caramellizedd/osu-BackgroundChanger\n" +
+                "Version: 1.0-PATCH";
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //The convert button will convert your png in jpg
