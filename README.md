@@ -15,6 +15,6 @@
 - Locking
     - Prevents OSU! from replacing the background as long as the program is running.
 
-## Version 1.0-PATCH
+## Version 1.1
 
 - **Required Libraries:** Costura.Fody.5.5.0
