@@ -49,21 +49,7 @@ namespace osu_BackgroundChanger
         //The info button, it will display a pop up with the text below
         private void InfoButton_Click(object sender, EventArgs e)
         {
-            const string title = "Info";
-            const string message = "Originally made by cayden. Modified by Charamellized.\n\n" +
-                "The basic resolution is: 2732x1536 (it can be lower)\n" +
-                "The import button is the image which is going to be imported as the osu! background.\n" +
-                "The reset button is going to delete the image you imported and can fix some problems.\n" +
-                "By the way, make sure when you click on reset, launch osu! and press the next button around 20 times for load all the background.\n" +
-                "The convert button is used for converting png to jpg.\n" +
-                "To make it work, put seasonal background as always.\n\n" +
-                "This program was modified to not use a paid library, which is now not working.\n\n" + 
-                "For any question ->\n" +
-                "My discord: cayden#3407 or charamellized\n" +
-                "Original Project Link: https://github.com/ret42/osu-BackgroundChanger\n" +
-                "Modified Project Link: https://github.com/caramellizedd/osu-BackgroundChanger\n" +
-                "Version: 1.0-PATCH";
-            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            new InfoForms().Show();
         }
 
         //The convert button will convert your png in jpg
@@ -72,14 +58,14 @@ namespace osu_BackgroundChanger
             OpenFileDialog opnfd = new OpenFileDialog();
             opnfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             opnfd.Filter = "Image Files (*.png)|*.png";
-            opnfd.Title = "Choose a png pls";
+            opnfd.Title = "Choose an image please uwu";
             if (opnfd.ShowDialog() == DialogResult.OK)
             {
                 ImagePreview.Image = new Bitmap(opnfd.FileName);
                 MessageBox.Show("Done !");
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "Image Files (*.jpg)|*.jpg";
-                sfd.Title = "Save me pls";
+                sfd.Title = "Save me aaaaaaaaaa";
                 sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
@@ -93,15 +79,16 @@ namespace osu_BackgroundChanger
         {
             OpenFileDialog opnfd = new OpenFileDialog();
             opnfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            opnfd.Title = "Import me";
+            opnfd.Title = "Select an image pleaseee";
             opnfd.Filter = "Image Files (*.jpg)|*.jpg";
             if (opnfd.ShowDialog() == DialogResult.OK)
             {
                 ImagePreview.Image = new Bitmap(opnfd.FileName);
-                string title = "Backup"; 
-                string message = "Would you want a backup ?";
+                label2.Visible = false;
+                string title = "Backup confirmation";
+                string message = "Do you want to do a backup?";
                 string title2 = "Finish";
-                string message2 = "Done !";
+                string message2 = "Backed up successfully!";
                 var result = MessageBox.Show(message, title, MessageBoxButtons.YesNoCancel);
 
                 if (result == DialogResult.Yes)
@@ -130,6 +117,11 @@ namespace osu_BackgroundChanger
                         {
                             File.Copy(source, oldNames[i]);
                         }
+                        foreach (var file in d.GetFiles("*.jpg"))
+                        {
+                            // Lock the file to prevent osu! from redownloading them
+                            FileStream fileStream = new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
+                        }
                     }
                 }
                 if (result == DialogResult.No)
@@ -138,7 +130,7 @@ namespace osu_BackgroundChanger
                     DirectoryInfo d = new DirectoryInfo(osuPath);
                     FileInfo[] files = d.GetFiles("*.jpg");
                     var xfiles = Directory.GetFiles(osuPath, "*.jpg");
-                    var oldNames = new List<string> (xfiles);
+                    var oldNames = new List<string>(xfiles);
                     int fileCount = files.Length;
                     foreach (var file in d.GetFiles("*.jpg"))
                     {
@@ -147,14 +139,20 @@ namespace osu_BackgroundChanger
 
                     var source = opnfd.FileName;
                     var destination = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"osu!", @"Data", @"bg", Path.GetFileName(source));
-                    string xtitle = "Finish";
-                    string xmsg = "Done !";
-                    MessageBox.Show(xmsg, xtitle);
                     for (var i = 0; i < oldNames.Count; i++)
                     {
                         File.Copy(source, oldNames[i]);
                     }
+                    foreach (var file in d.GetFiles("*.jpg"))
+                    {
+                        // Lock the file to prevent osu! from redownloading them
+                        FileStream fileStream = new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
+                    }
+                    string xtitle = "Finished";
+                    string xmsg = "Replaced successfully!";
+                    MessageBox.Show(xmsg, xtitle);
                 }
+                MessageBox.Show("Please keep this program open to prevent OSU! from replacing the wallpaper!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -168,8 +166,8 @@ namespace osu_BackgroundChanger
                 file.Delete();
             }
             string title = "Reset";
-            string message = "Done !";
-            MessageBox.Show(message, title);
+            string message = "Seasonal background has been resetted successfully!";
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

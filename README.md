@@ -12,6 +12,8 @@
   - Delete all of the images you have imported, make sure to launch the game and press next song around 20 times to load all the old backgrounds (it can also fix some problems)
 - Convert
     - Convert png to jpg
+- Locking
+    - Prevents OSU! from replacing the background as long as the program is running.
 
 ## Version 1.0-PATCH
 

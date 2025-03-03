@@ -191,6 +191,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InfoForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InfoForms.Designer.cs">
+      <DependentUpon>InfoForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="osuMainF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="InfoForms.resx">
+      <DependentUpon>InfoForms.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="osuMainF.resx">
       <DependentUpon>osuMainF.cs</DependentUpon>
     </EmbeddedResource>
